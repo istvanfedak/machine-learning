@@ -1,3 +1,6 @@
+This file's first parameter contains the precentage of the data used for training the classigier. 
+  The second parameter is the percent error the classifier had. 
+
 0 38.6207
 1 35.4723
 2 29.4704
