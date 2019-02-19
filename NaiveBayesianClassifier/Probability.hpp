@@ -2,6 +2,7 @@
 #define PROBABILITY_HPP
 #include "Frequency.hpp"
 
+// this class calculates the conditional probabilities
 struct AttrProb {
   double demYes; // P(yes | dem) = freq::demYes / (freq::demYes + freq::repYes)
   double repYes; // P(yes | rep) = freq::repYes / (freq::demYes + freq::repYes)
@@ -12,8 +13,9 @@ struct AttrProb {
   AttrProb();
 };
 
-typedef std::vector<AttrProb> AttrProbVec;
+typedef std::vector<AttrProb> AttrProbVec;	// an attribute probability vector for each attribute
 
+// class used to store the conditional probabilities of each attribute
 class Probability : public AttrProbVec {
  public:
   const unsigned int vecSize = 17;
@@ -21,7 +23,7 @@ class Probability : public AttrProbVec {
   double repProb; // P(rep) = freq::repCount / (freq::demCount + freq::repCount)
   void reset();
   Probability(const Frequency & freq);
-  void interpolation(const Frequency & freq);
+  void interpolation(const Frequency & freq);	// function that calculates conditional probabilities based on attribute value frequencies
   void print();
 };
 
