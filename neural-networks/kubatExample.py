@@ -11,7 +11,7 @@ nn.hiddenNeurons[0].weights[0] = -1.0
 nn.hiddenNeurons[0].weights[1] = 0.5
 
 nn.hiddenNeurons[1].weights[0] = 0.1
-nn.hiddenNeurons[1].weights[0] = 0.7
+nn.hiddenNeurons[1].weights[1] = 0.7
 
 # updating weights of output neurons to the ones in the example
 nn.outputNeurons[0].weights[0] = 0.9
