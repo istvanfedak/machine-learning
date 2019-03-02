@@ -1,3 +1,5 @@
+Run with python 3!
+
 The main purpose of this progrm is to make observations as
 to how the growing number of hidden neurons affects the ability
 to converge to low error rates. Also to observe the potentially
