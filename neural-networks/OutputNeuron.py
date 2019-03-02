@@ -51,7 +51,6 @@ class OutputNeuron:
       exit()
     # gets the input value to the given neuron
     inputVal = self.getOutputLayerInput(hiddenNeurons)
-    print('inputVal =', inputVal)
     # calculates and updates the output value of the hidden neuron
     self.value = 1.0 / (1 + e**(-1*inputVal))
 
@@ -64,7 +63,7 @@ class OutputNeuron:
     print('  Output neuron value = ', '%.2f' % self.value)
     i = 0
     # print out the weights
-    print('    Weights', end=' ')
+    print('       Weights', end=' ')
     i = 0
     while i < self.hiddenSize:
       print('%.2f' % self.weights[i], end=' ')

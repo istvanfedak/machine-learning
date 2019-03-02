@@ -64,7 +64,7 @@ class HiddenNeuron:
     print('  Hidden neuron value = ', '%.2f' % self.value)
     i = 0
     # print out the weights
-    print('    Weights', end=' ')
+    print('       Weights', end=' ')
     i = 0
     while i < self.inputSize:
       print('%.2f' % self.weights[i], end=' ')

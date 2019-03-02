@@ -47,7 +47,6 @@ class NeuralNetwork:
 
   # this function updates the value of the output layer neurons
   # given the values of the hidden neurons
-  # TODO test to see if it works
   # TODO make private
   def updateOutputLayerOutputs(self):
     # this loop iterates through all the output neurons and updates
@@ -55,5 +54,26 @@ class NeuralNetwork:
     i = 0
     while i < self.outputSize:
       # gives each output neuron the array of hidden neurons
-      self.outputNeurons[i].storeOutputLayerOutputs(self.hiddenNeurons)
-      i += 0
+      self.outputNeurons[i].storeOutputLayerOutput(self.hiddenNeurons)
+      i += 1
+
+  # print neural network
+  def print(self):
+    print('\nHidden Neurons')
+    print('--------------')
+    # print hidden neurons
+    i = 0
+    while i < self.hiddenSize:
+      print(i,': ', end='')
+      self.hiddenNeurons[i].print()
+      i += 1
+
+    print('\nOutput Neurons')
+    print('--------------')
+    # print output neurons
+    i = 0
+    while i < self.outputSize:
+      print(i,':', end='')
+      self.outputNeurons[i].print()
+      i += 1
+    print()
