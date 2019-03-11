@@ -24,11 +24,8 @@ nn.outputNeurons[1].weights[1] = -0.1
 # make the same input list as in the example
 inp = [0.8, 0.1]
 
-# update the value of the Hidden neurons
-nn.updateHiddenLayerOutputs(inp)
-
-# update the value of the Output neurons
-nn.updateOutputLayerOutputs()
+# do the forward propagation of the NeuralNetwork
+nn.forwardPropagation(inp)
 
 # print nerual network to check results
 nn.print()

@@ -8,6 +8,8 @@ class OutputNeuron:
   def __init__(self, hiddenSize):
     # the output signals that are going to classify the attribute
     self.value = None
+    # this is the value used for back propagation
+    self.gamma = None
     self.hiddenSize = hiddenSize
     # the weights that the hidden neurons have towards
     # this output neuron
@@ -47,7 +49,7 @@ class OutputNeuron:
     # output weights
     if len(hiddenNeurons) != self.hiddenSize:
       print('Error:: storeOutputLayerOutput::', end='')
-      print('len(hiddenInpit != self.hiddenSize')
+      print('len(hiddenInpit) != self.hiddenSize')
       exit()
     # gets the input value to the given neuron
     inputVal = self.getOutputLayerInput(hiddenNeurons)
@@ -56,7 +58,7 @@ class OutputNeuron:
 
   # print the Output neuron
   def print(self):
-    if(self.value is None):
+    if self.value is None:
       print('  Output neuron value = None')
       return
     #print out the values
@@ -66,6 +68,39 @@ class OutputNeuron:
     print('       Weights', end=' ')
     i = 0
     while i < self.hiddenSize:
-      print('%.2f' % self.weights[i], end=' ')
+      # print('%.2f' % self.weights[i], end=' ')
+      print(self.weights[i], end=' ')
       i += 1
-    print()
+    print(end='\n')
+
+    # printing gamma
+    if self.gamma is None:
+      print('     Output neuron gamma = None', end='\n\n')
+      return
+    print('     Output neuron gamma = ', '%.2f' % self.gamma, end='\n\n')
+
+  # this calculates the gamma for the neuron given the actual value
+  def calculateGamma(self, actualOutput):
+    if self.value is None:
+      print('Error: calculateGamma: value is None')
+      return
+    self.gamma = self.value*(1 - self.value)*(actualOutput - self.value)
+
+  # update the weights of the output neuron
+  # eta is the normalization factor
+  def updateWeights(self, hiddenNeurons, eta):
+    if self.gamma is None:
+      print('Error: updateWeights: gamma is None')
+      return
+    if len(hiddenNeurons) != self.hiddenSize:
+      print('Error: updateWeights: len(hiddenNeurons) != self.hiddenSize')
+      return
+    i = 0
+    while i < self.hiddenSize:
+      if hiddenNeurons[i].value is None:
+        print('Error: updateWeights: hiddenNeuron[%d].value is None' % i)
+        return
+      # updates each individual weight of the output neuron
+      self.weights[i] = self.weights[i] + eta*self.gamma*hiddenNeurons[i].value
+      i += 1
+

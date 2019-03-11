@@ -31,8 +31,7 @@ class NeuralNetwork:
 
   # this function updates the value of the hidden layer neurons
   # given an array of inputs
-  # TODO make private
-  def updateHiddenLayerOutputs(self, inputs):
+  def __updateHiddenLayerOutputs(self, inputs):
     if len(inputs) != self.inputSize:
       print('Error:: storeHiddenLayerOutputs::', end='')
       print('len(inputs) != inputSize')
@@ -47,8 +46,7 @@ class NeuralNetwork:
 
   # this function updates the value of the output layer neurons
   # given the values of the hidden neurons
-  # TODO make private
-  def updateOutputLayerOutputs(self):
+  def __updateOutputLayerOutputs(self):
     # this loop iterates through all the output neurons and updates
     # their output value given the values of the hidden neurons
     i = 0
@@ -56,6 +54,13 @@ class NeuralNetwork:
       # gives each output neuron the array of hidden neurons
       self.outputNeurons[i].storeOutputLayerOutput(self.hiddenNeurons)
       i += 1
+
+  # forward propagation of the neural network
+  def forwardPropagation(self, inputs):
+    # calculate the values for the hidden layer
+    self.__updateHiddenLayerOutputs(inputs)
+    # calvulate the values for the output layer
+    self.__updateOutputLayerOutputs()
 
   # print neural network
   def print(self):
@@ -76,4 +81,46 @@ class NeuralNetwork:
       print(i,':', end='')
       self.outputNeurons[i].print()
       i += 1
-    print()
+    print(end = '\n')
+
+  # calculates the gammas for both the output and hidden neurons
+  def __calculateGammas(self, actualOutputs):
+    # calculate the gamma for output neurons
+    i = 0
+    while i < self.outputSize:
+      self.outputNeurons[i].calculateGamma(actualOutputs[i])
+      i += 1
+    # calculate the gamma for hidden enurons
+    i = 0
+    while i < self.hiddenSize:
+      self.hiddenNeurons[i].calculateGamma(self.outputNeurons, i)
+      i += 1
+
+  # updates the weights for the entire network
+  def __updateWeights(self, inputs, eta):
+    # eta is the learning rate
+    # update the weights of the output layer
+    i = 0
+    while i < self.outputSize:
+      self.outputNeurons[i].updateWeights(self.hiddenNeurons, eta)
+      i += 1
+    # update the weights of the hidden layer
+    i = 0
+    while i < self.hiddenSize:
+      self.hiddenNeurons[i].updateWeights(inputs, eta)
+      i += 1
+
+  def backpropagation(self, inputs, actualOutputs, eta):
+    # calculates the gammas to update weights
+    self.__calculateGammas(actualOutputs)
+
+    # updates the weights of the entire network
+    # eta is the learning rate
+    self.__updateWeights(inputs, eta)
+
+  # train the neural network with one example 
+  # eta is the learning rate
+  def train(self, inputs, actualOutputs, eta):
+    self.forwardPropagation(inputs)
+    self.backPropagation(inputs, actualOutputs, eta)
+
