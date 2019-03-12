@@ -62,6 +62,15 @@ class NeuralNetwork:
     # calvulate the values for the output layer
     self.__updateOutputLayerOutputs()
 
+  # get an array of output values
+  def getResults(self):
+    result = []
+    i = 0
+    while i < self.outputSize:
+      result.append(self.outputNeurons[i].value)
+      i += 1
+    return result
+
   # print neural network
   def print(self):
     print('\nHidden Neurons')
