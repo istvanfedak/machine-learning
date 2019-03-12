@@ -32,4 +32,3 @@ Attriblutes:
        Links_pointing_to_page {  1, 0,-1 }
            Statistical_report { -1, 1 }
                        Result { -1, 1 }
-

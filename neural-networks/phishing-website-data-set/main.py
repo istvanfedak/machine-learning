@@ -10,14 +10,12 @@ dataFile = 'data.txt'
 # create the trainer that will be used to train the neural network
 trainer = Trainer(configFile, dataFile)
 
-# print neural net before epoch
-trainer.neuralNet.print()
-
 # do one epoch
-trainer.epoch()
+trainer.train()
 
-# print after epoch
-trainer.neuralNet.print()
+# test accuracy
+print('accuracy =', trainer.test())
+
 print('Done!')
 
 
