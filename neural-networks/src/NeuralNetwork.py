@@ -32,9 +32,9 @@ class NeuralNetwork:
   # this function updates the value of the hidden layer neurons
   # given an array of inputs
   def __updateHiddenLayerOutputs(self, inputs):
-    if len(inputs) != self.inputSize:
-      print('Error:: storeHiddenLayerOutputs::', end='')
-      print('len(inputs) != inputSize')
+    if len(inputs) < self.inputSize:
+      print('Error: updateHiddenLayerOutputs:', end='')
+      print('len(inputs) < inputSize')
       exit()
     # this loop iterates through all the hidden neurons and updates
     # their output value given an array of inputs
@@ -120,5 +120,5 @@ class NeuralNetwork:
   # train the neural network with one example 
   def train(self, inputs, actualOutputs, learningRate):
     self.forwardPropagation(inputs)
-    self.backPropagation(inputs, actualOutputs, learningRate)
+    self.backpropagation(inputs, actualOutputs, learningRate)
 

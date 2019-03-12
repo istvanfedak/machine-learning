@@ -25,10 +25,11 @@ class HiddenNeuron:
   # it takes in an array of inputs and returns the input
   # value for the hidden neuron
   def getHiddenLayerInput(self, inputs):
-    if len(inputs) != self.inputSize:
-      print('Error:: getHiddenLayerInput::', end='')
-      print('len(inputs) != inputSize')
-      exit()
+    if len(inputs) < self.inputSize:
+      print('Error: HiddenNeuron: getHiddenLayerInput: ', end='')
+      print('len(inputs) < inputSize')
+      raise ValueError()
+
     # this loop will calculate the input of the hidden neuron
     # and return the value
     i = 0
@@ -47,10 +48,10 @@ class HiddenNeuron:
   # this function updates the value of the hidden neurons
   # given an array of inputs
   def storeHiddenLayerOutput(self, inputs):
-    if len(inputs) != self.inputSize:
-      print('Error:: storeHiddenLayerOutputs::', end='')
-      print('len(inputs) != inputSize')
-      exit()
+    if len(inputs) < self.inputSize:
+      print('Error: HiddenNeuron: storeHiddenLayerOutputs: ', end='')
+      print('len(inputs) < inputSize')
+      raise ValueError()
 
     # gets the input to the hidden layer after calculating weights
     inputVal = self.getHiddenLayerInput(inputs)
@@ -94,16 +95,19 @@ class HiddenNeuron:
   # eta is the normalization factor
   def updateWeights(self, inputs, learningRate):
     if self.gamma is None:
-      print('Error: updateWeights: gamma is None')
-      return
+      print('Error: HiddenNeuron: updateWeights: ', end='')
+      print('gamma is None')
+      raise ValueError()
     i = 0
-    if len(inputs) != self.inputSize:
-      print('Error: updateWeights: len(inputs) != self.inputSize')
-      return
-    while(i < len(inputs)):
+    if len(inputs) < self.inputSize:
+      print('Error: HiddenNeuron: updateWeights: ', end='')
+      print('len(inputs) < self.inputSize')
+      raise ValueError()
+    while(i < self.inputSize):
       if(inputs[i] is None):
-        print('Error: updateWeights: inputs[%d] is None' % i)
-        return
+        print('Error: HiddenNeuron: updateWeights: ', end='')
+        print('inputs[%d] is None' % i)
+        raise ValueError()
       # updates each individual weight of the hidden neuron
       weightAdjustment = learningRate * self.gamma * inputs[i]
       self.weights[i] = self.weights[i] + weightAdjustment

@@ -28,9 +28,9 @@ class OutputNeuron:
     # makes sure that the hidden neuron array is the same size as
     # output weights
     if len(hiddenNeurons) != self.hiddenSize:
-      print('Error:: getOutputLayerInput::', end='')
-      print('len(hiddenInpit != self.hiddenSize')
-      exit()
+      print('Error: OutputNeuron: getOutputLayerInput: ', end='')
+      print('len(hiddenNeurons) != self.hiddenSize')
+      raise ValueError()
     i = 0
     value = 0
     while i < self.hiddenSize:
@@ -48,9 +48,9 @@ class OutputNeuron:
     # makes sure that the hidden neuron array is the same size as
     # output weights
     if len(hiddenNeurons) != self.hiddenSize:
-      print('Error:: storeOutputLayerOutput::', end='')
-      print('len(hiddenInpit) != self.hiddenSize')
-      exit()
+      print('Error: OutputNeuron: storeOutputLayerOutput: ', end='')
+      print('len(hiddenNeurons) != self.hiddenSize')
+      raise ValueError()
     # gets the input value to the given neuron
     inputVal = self.getOutputLayerInput(hiddenNeurons)
     # calculates and updates the output value of the hidden neuron
@@ -79,23 +79,27 @@ class OutputNeuron:
   # this calculates the gamma for the neuron given the actual value
   def calculateGamma(self, actualOutput):
     if self.value is None:
-      print('Error: calculateGamma: value is None')
-      return
+      print('Error: OutputNeuron: calculateGamma: ', end='')
+      print('value is None')
+      raise ValueError()
     self.gamma = self.value*(1 - self.value)*(actualOutput - self.value)
 
   # update the weights of the output neuron
   def updateWeights(self, hiddenNeurons, learningRate):
     if self.gamma is None:
-      print('Error: updateWeights: gamma is None')
-      return
+      print('Error: OutputNeuron: updateWeights: ', end='')
+      print('gamma is None')
+      raise ValueError()
     if len(hiddenNeurons) != self.hiddenSize:
-      print('Error: updateWeights: len(hiddenNeurons) != self.hiddenSize')
-      return
+      print('Error: OutputNeuron: updateWeights: ', end='')
+      print('len(hiddenNeurons) != self.hiddenSize')
+      raise ValueError()
     i = 0
     while i < self.hiddenSize:
       if hiddenNeurons[i].value is None:
-        print('Error: updateWeights: hiddenNeuron[%d].value is None' % i)
-        return
+        print('Error: OutputNeuron: updateWeights: ', end='')
+        print('hiddenNeuron[%d].value is None' % i)
+        raise ValueError()
       # updates each individual weight of the output neuron
       weightAdjustment = learningRate * self.gamma * hiddenNeurons[i].value
       self.weights[i] = self.weights[i] + weightAdjustment
