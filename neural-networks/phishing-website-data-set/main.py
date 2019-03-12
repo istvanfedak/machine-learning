@@ -10,7 +10,14 @@ dataFile = 'data.txt'
 # create the trainer that will be used to train the neural network
 trainer = Trainer(configFile, dataFile)
 
+# print neural net before epoch
+trainer.neuralNet.print()
 
+# do one epoch
+trainer.epoch()
 
-
+# print after epoch
+trainer.neuralNet.print()
 print('Done!')
+
+

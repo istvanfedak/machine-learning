@@ -17,4 +17,4 @@ class Config:
     self.trainingSize = int(config['trainingSize'])
     self.testingSize  = int(config['testingSize'])
     self.epochs       = int(config['epochs'])
-    self.trainingRate = float(config['trainingRate'])
+    self.learningRate = float(config['learningRate'])
