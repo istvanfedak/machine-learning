@@ -1,0 +1,9 @@
+{
+     "inputSize": "6",
+    "hiddenSize": "50",
+    "outputSize": "4",
+  "trainingSize": "800",
+   "testingSize": "10",
+        "epochs": "10",
+  "learningRate": "0.1"
+}
