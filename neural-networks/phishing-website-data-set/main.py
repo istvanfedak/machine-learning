@@ -1,12 +1,16 @@
-# allows to import NeuralNetwork lib from different dir
-import sys
+# import the trainer for the neural network
+from Trainer import Trainer
 
-# inserts path to access NeuralNetwork lib
-sys.path.insert(0, '../src')
+# delcare configuration file name
+configFile = 'config.json'
 
-from NeuralNetwork import NeuralNetwork
+# database file name
+dataFile = 'data.txt'
+
+# create the trainer that will be used to train the neural network
+trainer = Trainer(configFile, dataFile)
 
 
 
 
-print("Done!")
+print('Done!')

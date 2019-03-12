@@ -1,0 +1,11 @@
+{
+     "inputSize": "30",
+    "hiddenSize": "100",
+    "outputSize": "2",
+  "trainingSize": "10",
+   "testingSize": "3",
+        "epochs": "1000",
+  "trainingRate": "0.1"
+}
+
+
