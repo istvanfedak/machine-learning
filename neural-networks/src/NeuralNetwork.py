@@ -69,7 +69,7 @@ class NeuralNetwork:
     # print hidden neurons
     i = 0
     while i < self.hiddenSize:
-      print(i,': ', end='')
+      print('%3d' % (i+1),': ', end='')
       self.hiddenNeurons[i].print()
       i += 1
 
@@ -78,7 +78,7 @@ class NeuralNetwork:
     # print output neurons
     i = 0
     while i < self.outputSize:
-      print(i,':', end='')
+      print('%3d' % (i+1),': ', end='')
       self.outputNeurons[i].print()
       i += 1
     print(end = '\n')
@@ -97,30 +97,28 @@ class NeuralNetwork:
       i += 1
 
   # updates the weights for the entire network
-  def __updateWeights(self, inputs, eta):
-    # eta is the learning rate
+  def __updateWeights(self, inputs, learningRate):
     # update the weights of the output layer
     i = 0
     while i < self.outputSize:
-      self.outputNeurons[i].updateWeights(self.hiddenNeurons, eta)
+      self.outputNeurons[i].updateWeights(self.hiddenNeurons, learningRate)
       i += 1
     # update the weights of the hidden layer
     i = 0
     while i < self.hiddenSize:
-      self.hiddenNeurons[i].updateWeights(inputs, eta)
+      self.hiddenNeurons[i].updateWeights(inputs, learningRate)
       i += 1
 
-  def backpropagation(self, inputs, actualOutputs, eta):
+  def backpropagation(self, inputs, actualOutputs, learningRate):
     # calculates the gammas to update weights
     self.__calculateGammas(actualOutputs)
 
     # updates the weights of the entire network
     # eta is the learning rate
-    self.__updateWeights(inputs, eta)
+    self.__updateWeights(inputs, learningRate)
 
   # train the neural network with one example 
-  # eta is the learning rate
-  def train(self, inputs, actualOutputs, eta):
+  def train(self, inputs, actualOutputs, learningRate):
     self.forwardPropagation(inputs)
-    self.backPropagation(inputs, actualOutputs, eta)
+    self.backPropagation(inputs, actualOutputs, learningRate)
 

@@ -66,17 +66,15 @@ class HiddenNeuron:
     print(' Hidden neuron value = ', '%.2f' % self.value)
     i = 0
     # print out the weights
-    print('       Weights', end=' ')
+    print('         Weights', end='\n')
     i = 0
     while i < self.inputSize:
-      print(self.weights[i], end=' ')
-      # print('%.2f' % self.weights[i], end=' ')
+      print('           %.2f' % self.weights[i], end='\n')
       i += 1
-    print(end='\n')
     if(self.gamma is None):
-      print('     Hidden neuron gamma = None', end='\n\n')
+      print('       Hidden neuron gamma = None', end='\n\n')
       return
-    print('     Hidden neuron gamma = ', '%.2f' % self.gamma, end='\n\n')
+    print('       Hidden neuron gamma = ', '%.2f' % self.gamma, end='\n\n')
 
   # This function takes an output layer of neurons
   # and calculates the backpropagation error of them
@@ -94,7 +92,7 @@ class HiddenNeuron:
 
   # update the weights of the output neuron
   # eta is the normalization factor
-  def updateWeights(self, inputs, eta):
+  def updateWeights(self, inputs, learningRate):
     if self.gamma is None:
       print('Error: updateWeights: gamma is None')
       return
@@ -107,6 +105,7 @@ class HiddenNeuron:
         print('Error: updateWeights: inputs[%d] is None' % i)
         return
       # updates each individual weight of the hidden neuron
-      self.weights[i] = self.weights[i] + eta * self.gamma * inputs[i]
+      weightAdjustment = learningRate * self.gamma * inputs[i]
+      self.weights[i] = self.weights[i] + weightAdjustment
       i += 1
 
