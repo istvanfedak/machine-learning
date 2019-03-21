@@ -78,3 +78,17 @@ class Trainer:
     self.accuracy = correct / self.config.testingSize
     return self.accuracy
 
+  # logs the accuracy after each epoch to a specified dir
+  # the file name will be log<number-hidden-neurons>.txt
+  def logTraining(self):
+    fd = open(self.config.logFolder + 'log' + str(self.config.hiddenSize) + '.txt', 'w')
+    # this variable is for printing the percentage of work being done
+    rem = self.config.epochs
+    i = 0
+    while i < self.config.epochs:
+      print('Progress [',i,']\r', end='')
+      self.epoch()
+      fd.write(str(self.test()))
+      fd.write('\n')
+      i += 1
+    fd.close()

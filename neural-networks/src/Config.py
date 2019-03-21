@@ -21,3 +21,4 @@ class Config:
     self.learningRate = float(config['learningRate'])
     self.delimiters   = config['delimiters']
     self.resultIndex  = int(config['resultIndex'])
+    self.logFolder    = config['logFolder']

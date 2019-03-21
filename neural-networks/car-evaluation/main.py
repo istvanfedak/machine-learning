@@ -11,8 +11,8 @@ configFile = 'config.json'
 # create the trainer that will be used to train the neural network
 trainer = Trainer(configFile)
 
-# do one epoch
-trainer.train()
+# logs the training and accuracy after each epoch
+trainer.logTraining()
 
 # test accuracy
 print('accuracy =', trainer.test())

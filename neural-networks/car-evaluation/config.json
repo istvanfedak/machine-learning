@@ -5,8 +5,9 @@
     "outputSize": "4",
   "trainingSize": "1400",
    "testingSize": "300",
-        "epochs": "1000",
+        "epochs": "100",
   "learningRate": "0.3",
     "delimiters": ",",
-   "resultIndex": "6"
+   "resultIndex": "6",
+     "logFolder": "./results/"
 }

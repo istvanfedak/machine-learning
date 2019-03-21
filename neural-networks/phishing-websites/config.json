@@ -8,5 +8,6 @@
         "epochs": "10",
   "learningRate": "0.3",
     "delimiters": ",",
-   "resultIndex": "30"
+   "resultIndex": "30",
+     "logFolder": "./results/"
 }
