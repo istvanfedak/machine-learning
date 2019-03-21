@@ -1,7 +1,7 @@
 {
       "dataFile": "./data/new-data-shuf.txt",
      "inputSize": "6",
-    "hiddenSize": "6",
+    "hiddenSize": "9",
     "outputSize": "4",
   "trainingSize": "1400",
    "testingSize": "300",
