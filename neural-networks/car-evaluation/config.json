@@ -1,11 +1,11 @@
 {
       "dataFile": "./data/new-data-shuf.txt",
      "inputSize": "6",
-    "hiddenSize": "50",
+    "hiddenSize": "13",
     "outputSize": "4",
   "trainingSize": "1400",
    "testingSize": "300",
-        "epochs": "100",
+        "epochs": "1000",
   "learningRate": "0.3",
     "delimiters": ",",
    "resultIndex": "6",
