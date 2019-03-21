@@ -17,7 +17,7 @@ class OutputNeuron:
     # initialize the weights
     i = 0
     while i < hiddenSize:
-      self.weights.append(random.uniform(-0.1, 0.1))
+      self.weights.append(random.uniform(-0.01, 0.01))
       i += 1
 
   # gets the inputs for the output neuron

@@ -1,9 +1,12 @@
 {
+      "dataFile": "./data/data.txt",
      "inputSize": "30",
-    "hiddenSize": "50",
+    "hiddenSize": "20",
     "outputSize": "2",
-  "trainingSize": "80",
-   "testingSize": "10",
+  "trainingSize": "1000",
+   "testingSize": "100",
         "epochs": "10",
-  "learningRate": "0.1"
+  "learningRate": "0.3",
+    "delimiters": ",",
+   "resultIndex": "30"
 }

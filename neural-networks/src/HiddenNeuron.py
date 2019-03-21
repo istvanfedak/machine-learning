@@ -18,7 +18,7 @@ class HiddenNeuron:
     # initializes the  weights
     i = 0
     while i < self.inputSize:
-      self.weights.append(random.uniform(-0.1, 0.1))
+      self.weights.append(random.uniform(-0.011, 0.011))
       i += 1
 
   # gets the inputs of the hidden-layer neurons

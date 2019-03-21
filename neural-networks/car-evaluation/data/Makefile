@@ -1,5 +1,5 @@
 CC = g++
-SRC = convert.cpp ../../naive-bayesian-classifier/Data.cpp
+SRC = convert.cpp ../../src/Data.cpp
 EXE = convert.out
 
 all: compile

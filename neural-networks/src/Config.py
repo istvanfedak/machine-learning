@@ -11,10 +11,13 @@ class Config:
         exit(1)
       fin.close()
     # store all the configurations
-    self.inputSize   = int(config['inputSize'])
+    self.dataFile     = config['dataFile']
+    self.inputSize    = int(config['inputSize'])
     self.hiddenSize   = int(config['hiddenSize'])
     self.outputSize   = int(config['outputSize'])
     self.trainingSize = int(config['trainingSize'])
     self.testingSize  = int(config['testingSize'])
     self.epochs       = int(config['epochs'])
     self.learningRate = float(config['learningRate'])
+    self.delimiters   = config['delimiters']
+    self.resultIndex  = int(config['resultIndex'])

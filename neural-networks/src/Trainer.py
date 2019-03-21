@@ -4,21 +4,17 @@ sys.path.insert(0, '../src')
 
 from NeuralNetwork import NeuralNetwork
 from Config import Config
-
-# this function reads a file and converts it to an int matrix
-def readDataMatrix(fd, size):
-  data = []
-  i = 0
-  line = fd.readline()
-  while i < size and line:
-    # convert string line into int array
-    data.append(list(map(float,line.split(','))))
-    line = fd.readline()
-    i += 1
-  return data
+# these are support functions
+from Roster import Roster
 
 class Trainer:
-  def __init__(self, configFile, dataFile):
+  # config file is the file name of the json config file for the trainer
+  # the roster is a class that contains support functions specific to the data
+  #  being trained
+  def __init__(self, configFile):
+    # assign the roster that will be used on the data
+    self.roster = Roster()
+
     # creates a config object that stores all of the information for the settup
     self.config = Config(configFile)
 
@@ -26,81 +22,39 @@ class Trainer:
     self.neuralNet = NeuralNetwork(self.config.inputSize, self.config.hiddenSize, self.config.outputSize)
 
     # open a temporary file
-    fin = open(dataFile, 'r')
+    fin = open(self.config.dataFile, 'r')
     if fin is None:
       print('Error: Trainer(): data file not found:', datafile)
       raise ValueError()
 
     # read in all the training data
-    self.trainingData = readDataMatrix(fin, self.config.trainingSize)
+    self.trainingData = self.roster.readData(fin, self.config.trainingSize, self.config.delimiters)
 
     # read in all the testing data
-    self.testingData = readDataMatrix(fin, self.config.testingSize)
+    self.testingData = self.roster.readData(fin, self.config.testingSize, self.config.delimiters)
 
     # stores the accuracy of the neural network
     self.accuracy = None
     # close file after using it
     fin.close()
 
-  """
-  # these are used for the new data set
-
-  # converts the int result to an array
-  def getResult(self, result):
-    # if the website is not phishing
-    if result is 1:
-      return [1]
-    # if the website is considered to be phishing
-    else:
-      return [0]
-
-  # converts the result array into an int to compare
-  def convertResult(self, resultArray):
-    # if the website is not phishing
-    if resultArray[0] > 0.5:
-      return 1
-    else:
-      return 0 """
-
-  # converts the int result to an array
-  def getResult(self, result):
-    # if the website is not phishing
-    if result is 1:
-      return [1, 0, 0, 0]
-    # if the website is considered to be phishing
-    elif result is 2:
-      return [0, 1, 0, 0]
-    elif result is 3:
-      return [0, 0, 1, 0]
-    else:
-      return [0, 0, 0, 1]
-
-  # converts the result array into an int to compare
-  def convertResult(self, resultArray):
-    # retrun the highest value
-    largest = 0
-    i = 1
-    while i < len(resultArray):
-      if resultArray[i] > resultArray[largest]:
-        largest = i
-      i += 1
-    return largest + 1
-
   # this function would do one epoch with the training data
   def epoch(self):
     i = 0
     while i < self.config.trainingSize:
-      last = len(self.trainingData[i]) - 1
       # this is the output array for back propagation
-      result = self.getResult(self.trainingData[i][last])
+      result = self.roster.convert(self.trainingData[i], self.config.outputSize, self.config.resultIndex)
       # train the neural net with the given training data
       self.neuralNet.train(self.trainingData[i], result, self.config.learningRate)
       i += 1
 
   # this function will train the data for the number of epochs in config
   def train(self):
+    # this variable is for printing the percentage of work being done
+    rem = self.config.epochs
     i = 0
     while i < self.config.epochs:
+      print('Progress [',i,']\r', end='')
       self.epoch()
       i += 1
 
@@ -111,7 +65,6 @@ class Trainer:
     # iterate through all the testing examples
     i = 0
     while i < self.config.testingSize:
-      last = len(self.testingData[i]) -1
       # calculate the result for the training example
       self.neuralNet.forwardPropagation(self.testingData[i])
 
@@ -119,7 +72,7 @@ class Trainer:
       result = self.neuralNet.getResults()
 
       # check to see if the result is correct
-      if self.testingData[i][last] == self.convertResult(result):
+      if self.roster.compare(self.testingData[i], result, self.config.resultIndex):
         correct += 1
       i += 1
     self.accuracy = correct / self.config.testingSize
