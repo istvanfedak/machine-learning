@@ -20,6 +20,6 @@ repository were be used to train the neural network.
 
 The following learning reate was used: 0.01.
 
-The number of hidden neurons were purposely allowd to vary
+The number of hidden neurons were purposely allowed to vary
 in size (roughly 5 - 50).
 
