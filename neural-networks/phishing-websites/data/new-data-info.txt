@@ -35,5 +35,5 @@ Attriblutes:
                  Google_Index {  1,0 }
        Links_pointing_to_page {  1, 0.5,0 }
            Statistical_report { 0, 1 }
-                       Result { 0, 1 }
+                       Result { 1, 2 }
 
