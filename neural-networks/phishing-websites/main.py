@@ -5,18 +5,6 @@ sys.path.insert(0, '../src')
 # import the trainer for the neural network
 from Trainer import Trainer
 
-# delcare configuration file name
-configFile = 'config.json'
-
 # create the trainer that will be used to train the neural network
-trainer = Trainer(configFile)
-
-# logs the training and accuracy after each epoch
-trainer.logTraining()
-
-# test accuracy
-print('accuracy =', trainer.test())
-
-print('Done!')
-
-
+# it will read the config file and log the training
+trainer = Trainer('config.json')

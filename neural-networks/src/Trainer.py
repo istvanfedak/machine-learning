@@ -11,7 +11,10 @@ class Trainer:
   # config file is the file name of the json config file for the trainer
   # the roster is a class that contains support functions specific to the data
   #  being trained
-  def __init__(self, configFile):
+  def __init__(self, configFile, printInfo = True, logTrain = True):
+    # if printInfo is false, the trainer wont print anything
+    self.printInfo = printInfo
+
     # assign the roster that will be used on the data
     self.roster = Roster()
 
@@ -38,6 +41,9 @@ class Trainer:
     # close file after using it
     fin.close()
 
+    # if logTrain is True run logTraining
+    self.logTraining()
+
   # this function would do one epoch with the training data
   def epoch(self):
     i = 0
@@ -54,7 +60,8 @@ class Trainer:
     rem = self.config.epochs
     i = 0
     while i < self.config.epochs:
-      print('Progress [',i,']\r', end='')
+      if self.printInfo:
+        print('Progress [',i,']\r', end='')
       self.epoch()
       i += 1
 
@@ -86,9 +93,12 @@ class Trainer:
     rem = self.config.epochs
     i = 0
     while i < self.config.epochs:
-      print('Progress [',i,']\r', end='')
+      if self.printInfo:
+        print('Progress [',i,']\r', end='')
       self.epoch()
       fd.write(str(self.test()))
       fd.write('\n')
       i += 1
+    if self.printInfo:
+      print('accuracy =', self.test())
     fd.close()
